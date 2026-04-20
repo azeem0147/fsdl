@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Analytics Dashboard</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Responsive navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top dashboard-nav">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#home" aria-label="Weather dashboard home">
+                <span class="brand-mark"><i class="bi bi-cloud-sun"></i></span>
+                WeatherScope
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-lg-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reports">Reports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#analytics">Analytics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <div class="clock-pill" aria-label="Live clock">
+                        <i class="bi bi-clock"></i>
+                        <span id="liveClock">--:--:--</span>
+                    </div>
+
+                    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+                        <i class="bi bi-moon-stars" id="themeIcon"></i>
+                        <span id="themeText">Dark</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="home">
+        <!-- Header section -->
+        <section class="dashboard-header">
+            <div class="container-fluid">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-7">
+                        <span class="eyebrow">Live Sample Dashboard</span>
+                        <h1>Weather Analytics Dashboard</h1>
+                        <p>Real-time weather trends and forecasting insights for better planning, travel, and outdoor decisions.</p>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="hero-weather">
+                            <img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1100&q=80" alt="Weather radar clouds over a city">
+                            <div class="weather-badge">
+                                <i class="bi bi-geo-alt"></i>
+                                <span id="activeCityBadge">Pune, India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <section class="controls-section" id="reports">
+            <div class="container-fluid">
+                <div class="control-panel">
+                    <div>
+                        <label class="form-label" for="citySelect">Select city</label>
+                        <select class="form-select" id="citySelect"></select>
+                    </div>
+
+                    <div>
+                        <label class="form-label" for="citySearch">Search city</label>
+                        <div class="search-wrap">
+                            <i class="bi bi-search"></i>
+                            <input class="form-control" id="citySearch" type="search" placeholder="Search Pune, Mumbai, Delhi">
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="form-label d-block">View range</span>
+                        <div class="range-buttons" role="group" aria-label="Weather data range">
+                            <button class="range-btn active" type="button" data-range="week">Week</button>
+                            <button class="range-btn" type="button" data-range="month">Month</button>
+                        </div>
+                    </div>
+
+                    <div class="control-note">
+                        <i class="bi bi-info-circle"></i>
+                        <span>Charts update instantly from JavaScript weather objects.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary cards -->
+        <section class="summary-section">
+            <div class="container-fluid">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <article class="summary-card">
+                            <div class="summary-icon temp"><i class="bi bi-thermometer-half"></i></div>
+                            <div>
+                                <p>Current Temperature</p>
+                                <h2><span class="counter" id="temperatureValue">0</span><small>°C</small></h2>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <article class="summary-card">
+                            <div class="summary-icon humidity"><i class="bi bi-droplet-half"></i></div>
+                            <div>
+                                <p>Humidity</p>
+                                <h2><span class="counter" id="humidityValue">0</span><small>%</small></h2>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <article class="summary-card">
+                            <div class="summary-icon wind"><i class="bi bi-wind"></i></div>
+                            <div>
+                                <p>Wind Speed</p>
+                                <h2><span class="counter" id="windValue">0</span><small>km/h</small></h2>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-sm-6 col-xl-3">
+                        <article class="summary-card">
+                            <div class="summary-icon rain"><i class="bi bi-cloud-rain-heavy"></i></div>
+                            <div>
+                                <p>Rain Probability</p>
+                                <h2><span class="counter" id="rainValue">0</span><small>%</small></h2>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section class="analytics-section" id="analytics">
+            <div class="container-fluid">
+                <div class="section-heading">
+                    <span class="eyebrow">Analytics</span>
+                    <h2>Weather Trends</h2>
+                    <p>Interactive charts compare temperature, humidity, conditions, and overall weather metrics.</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-xl-8">
+                        <article class="chart-panel">
+                            <div class="panel-header">
+                                <div>
+                                    <h3>Weekly Temperature Trend</h3>
+                                    <p>Daily high temperature pattern.</p>
+                                </div>
+                                <button class="export-btn" type="button" data-chart="temperatureChart">
+                                    <i class="bi bi-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                            <div class="chart-box">
+                                <canvas id="temperatureChart"></canvas>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-xl-4">
+                        <article class="chart-panel">
+                            <div class="panel-header">
+                                <div>
+                                    <h3>Condition Share</h3>
+                                    <p>Sunny, cloudy, rainy, and stormy days.</p>
+                                </div>
+                                <button class="export-btn" type="button" data-chart="conditionChart" aria-label="Export condition chart">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </div>
+                            <div class="chart-box doughnut-box">
+                                <canvas id="conditionChart"></canvas>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <article class="chart-panel">
+                            <div class="panel-header">
+                                <div>
+                                    <h3>Humidity Levels</h3>
+                                    <p>Relative humidity across selected days.</p>
+                                </div>
+                                <button class="export-btn" type="button" data-chart="humidityChart">
+                                    <i class="bi bi-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                            <div class="chart-box">
+                                <canvas id="humidityChart"></canvas>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <article class="chart-panel">
+                            <div class="panel-header">
+                                <div>
+                                    <h3>Weather Metrics Radar</h3>
+                                    <p>Temperature, wind, humidity, visibility, and pressure.</p>
+                                </div>
+                                <button class="export-btn" type="button" data-chart="metricsChart">
+                                    <i class="bi bi-download"></i>
+                                    Export
+                                </button>
+                            </div>
+                            <div class="chart-box">
+                                <canvas id="metricsChart"></canvas>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forecast table -->
+        <section class="forecast-section">
+            <div class="container-fluid">
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <article class="table-panel">
+                            <div class="section-heading compact">
+                                <span class="eyebrow">Forecast</span>
+                                <h2>Next 5 Days</h2>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table forecast-table align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Temperature</th>
+                                            <th>Humidity</th>
+                                            <th>Condition</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="forecastTableBody"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <article class="insight-panel">
+                            <span class="eyebrow">Planning Tip</span>
+                            <h2 id="insightTitle">Carry sunglasses</h2>
+                            <p id="insightText">Clear skies are likely, so plan outdoor work during cooler morning hours.</p>
+                            <div class="insight-meter">
+                                <span>Comfort Index</span>
+                                <strong id="comfortIndex">82%</strong>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact-section" id="contact">
+            <div class="container-fluid">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-5">
+                        <div class="section-heading compact">
+                            <span class="eyebrow">Contact</span>
+                            <h2>Request a custom report</h2>
+                            <p>Send a message for a city-wise dashboard, student report, or analytics variation.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <form class="contact-form" id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="contactName">Name</label>
+                                    <input class="form-control" id="contactName" type="text" placeholder="Your name" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="contactEmail">Email</label>
+                                    <input class="form-control" id="contactEmail" type="email" placeholder="you@example.com" required>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label" for="contactMessage">Message</label>
+                                    <textarea class="form-control" id="contactMessage" placeholder="Write your message" required></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary-action" type="submit">
+                                        <i class="bi bi-send me-2"></i>Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-5">
+                    <h2>Developed by Ajim Pathan</h2>
+                    <p>&copy; 2026 WeatherScope Dashboard. All rights reserved.</p>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="social-links" aria-label="Social media links">
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 text-lg-end">
+                    <a class="back-top" href="#home">Back to top <i class="bi bi-arrow-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="dashboardToast" class="toast dashboard-toast" role="status" aria-live="polite" aria-atomic="true">
+            <div class="toast-body" id="toastMessage">Dashboard updated.</div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
