@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleStore | Dynamic Fashion Store</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Responsive sticky navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top fashion-nav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#home" aria-label="StyleStore home">
+                <span class="brand-mark"><i class="bi bi-bag-heart"></i></span>
+                StyleStore
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-lg-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+                    <li class="nav-item"><button class="nav-link cart-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">Cart</button></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions d-flex align-items-center gap-2">
+                    <div class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input id="searchInput" type="search" placeholder="Search fashion" aria-label="Search products">
+                    </div>
+
+                    <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode">
+                        <i class="bi bi-moon-stars" id="themeIcon"></i>
+                    </button>
+
+                    <button class="cart-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-label="Open shopping cart">
+                        <i class="bi bi-bag"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero section -->
+        <section class="hero-section" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-kicker">Fresh styles for every day</span>
+                    <h1>Latest Fashion Collection</h1>
+                    <p>
+                        Discover polished outfits, standout accessories, and easy wardrobe upgrades curated for modern campus and city life.
+                    </p>
+                    <a class="btn btn-shop" href="#products">Shop Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category filter section -->
+        <section class="category-section" id="categories">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <span>Categories</span>
+                    <h2>Choose Your Style</h2>
+                    <p>Filter products instantly by category or search by product name.</p>
+                </div>
+
+                <div class="category-buttons" aria-label="Product category filters">
+                    <button class="filter-btn active" type="button" data-category="All">All</button>
+                    <button class="filter-btn" type="button" data-category="Men">Men</button>
+                    <button class="filter-btn" type="button" data-category="Women">Women</button>
+                    <button class="filter-btn" type="button" data-category="Accessories">Accessories</button>
+                    <button class="filter-btn" type="button" data-category="Footwear">Footwear</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic product section -->
+        <section class="product-section" id="products">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <span>Products</span>
+                    <h2>Trending Picks</h2>
+                    <p id="productStatus">Showing all products.</p>
+                </div>
+
+                <div class="row g-4 mt-2" id="productGrid" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <!-- Contact section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-5">
+                        <div class="contact-copy">
+                            <span>Contact</span>
+                            <h2>Need help choosing a look?</h2>
+                            <p>
+                                Send your question and the StyleStore team will help with sizes, styling ideas, and product details.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <form class="contact-form" id="contactForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="contactName">Name</label>
+                                    <input class="form-control" id="contactName" type="text" placeholder="Your name" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="contactEmail">Email</label>
+                                    <input class="form-control" id="contactEmail" type="email" placeholder="you@example.com" required>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label" for="contactMessage">Message</label>
+                                    <textarea class="form-control" id="contactMessage" placeholder="Write your message" required></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-submit" type="submit">
+                                        <i class="bi bi-send me-2"></i>Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-4">
+                    <a class="footer-brand" href="#home">
+                        <span class="brand-mark"><i class="bi bi-bag-heart"></i></span>
+                        StyleStore
+                    </a>
+                    <p class="mt-3 mb-0">&copy; 2026 StyleStore. All rights reserved.</p>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="social-links" aria-label="Social links">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <form class="newsletter" id="newsletterForm">
+                        <label class="form-label" for="newsletterEmail">Newsletter</label>
+                        <div class="newsletter-row">
+                            <input class="form-control" id="newsletterEmail" type="email" placeholder="Email address" required>
+                            <button class="btn btn-newsletter" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart sidebar -->
+    <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartTitle">
+        <div class="offcanvas-header">
+            <div>
+                <p class="offcanvas-kicker mb-1">Shopping Cart</p>
+                <h2 class="offcanvas-title" id="cartTitle">Your Items</h2>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <div id="cartItems" class="cart-items"></div>
+            <p class="empty-cart" id="emptyCart">Your cart is empty.</p>
+        </div>
+
+        <div class="cart-summary">
+            <div class="total-row">
+                <span>Total</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <button class="btn btn-checkout" type="button" id="checkoutBtn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Product quick view modal -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content quick-modal">
+                <button type="button" class="btn-close quick-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img id="quickViewImage" class="quick-image" src="" alt="">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="quick-body">
+                            <span id="quickViewCategory" class="product-category"></span>
+                            <h2 id="quickViewTitle"></h2>
+                            <div id="quickViewRating" class="rating mb-2"></div>
+                            <p id="quickViewDescription"></p>
+                            <strong id="quickViewPrice" class="quick-price"></strong>
+                            <button class="btn btn-shop mt-4" id="quickAddBtn" type="button">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="storeToast" class="toast store-toast" role="status" aria-live="polite" aria-atomic="true">
+            <div class="toast-body" id="toastMessage">Product added to cart.</div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
